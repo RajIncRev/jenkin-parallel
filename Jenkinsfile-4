@@ -38,10 +38,17 @@ pipeline {
             stage('scan') {
               steps {
               	withSonarQubeEnv(installationName: 'SQ-1'){
-              		bat "mvnw  clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.8.0.2131:sonar"
+              		bat "mvnw  clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.8s.0.2131:sonar"
               	}
                  echo "Run application on amd"
               }
+            }
+            stage('Quality Gate'){
+            	steps{
+            		timeout(time: 2,units:'MINUTES'){
+            			waitForQualityGate abortPipeline: true
+            		}
+            	}
             }
             stage('unit test') {
               steps {
