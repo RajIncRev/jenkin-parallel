@@ -4,7 +4,7 @@ pipeline {
     stage('build and run') {
       parallel {
         stage('linux-armv6') {
-          agent none
+          agent any
           stages {
             stage('build') {
               steps {
