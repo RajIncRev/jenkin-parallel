@@ -19,7 +19,41 @@ pipeline {
               }
             }
           }
-        }      
+        }
+        stage('linux-amd64') {
+          agent any
+          stages {
+            stage('build') {
+              steps {
+                echo "Build application-1 in Linux agent"
+             	echo "Build application"
+			 	bat "mvnw  -Dmaven.test.skip=true clean compile package"
+              }
+            }
+            stage('run') {
+              steps {
+                echo "Run application-1 in linux agent"
+              }
+            }
+          }
+        } 
+         stage('darwin-amd64') {
+          agent any
+          stages {
+            stage('build') {
+              steps {
+                 echo "Build application-1 in Darwin agent"
+             	 echo "Build application"
+			 	 bat "mvnw  -Dmaven.test.skip=true clean compile package"
+              }
+            }
+            stage('run') {
+              steps {
+                echo "Run application-1 in drawin agent"
+              }
+            }
+          }
+        }                 
       }
     }
   }
