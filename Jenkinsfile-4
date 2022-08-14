@@ -69,7 +69,7 @@ pipeline {
             }
             stage('unit test') {
               steps {
-                sh 'echo unit test'
+                echo 'echo unit test'
               }
             }
           }
