@@ -1,0 +1,80 @@
+pipeline {
+  agent none
+  stages {
+    stage('build and run') {
+      parallel {
+        stage('linux-armv6') {
+          agent any
+          stages {
+            stage('build') {
+              steps {
+                 echo "Build application-1 in Darwin agent"
+             	 echo "Build application"
+			 	 bat "mvnw  -Dmaven.test.skip=true clean compile package"
+              }
+            }
+            stage('run') {
+              steps {
+                 echo "Run application on linux"
+              }
+            }
+          }
+        }
+        stage('linux-amd64') {
+          agent any
+          stages {
+            stage('build') {
+              steps {
+                 echo "Build application-1 in Darwin agent"
+             	 echo "Build application"
+			 	 bat "mvnw  -Dmaven.test.skip=true clean compile package"
+              }
+            }
+            stage('run') {
+              steps {
+                 echo "Run application on amd"
+              }
+            }
+            stage('unit test') {
+              steps {
+                 echo "Run unit test"
+              }
+            }
+            stage('load test') {
+              steps {
+                echo "Run load test"
+              }
+            }
+            stage('deploy to storage') {
+              steps {
+                 echo "deploy to storage"
+              }
+            }
+          }
+        }      
+        stage('darwin-amd64') {
+          agent any
+          stages {
+            stage('build') {
+              steps {
+                  echo "Build application-1 in Darwin agent"
+             	  echo "Build application"
+			 	  bat "mvnw  -Dmaven.test.skip=true clean compile package"
+              }
+            }
+            stage('run') {
+              steps {
+                 echo "Run application on drawin"
+              }
+            }
+            stage('unit test') {
+              steps {
+                sh 'echo unit test'
+              }
+            }
+          }
+        }      
+      }
+    }
+  }
+}
