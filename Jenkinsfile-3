@@ -3,8 +3,8 @@ pipeline {
   stages {
     stage('build and run') {
       parallel {
-        stage('Stage-1') {
-          agent {label 'windows'}
+        stage('linux-armv6') {
+          agent {label 'linux-armv6'}
           stages {
             stage('build') {
               steps {
@@ -19,8 +19,8 @@ pipeline {
             }
           }
         }
-        stage('linux-amd64') {
-          agent {label 'windows'}
+          stage('darwin-amd64') {
+          agent {label 'darwin-amd64'}
           stages {
             stage('build') {
               steps {
@@ -35,8 +35,8 @@ pipeline {
             }
           }
         }      
-        stage('darwin-amd64') {
-          agent {label 'windows'}
+        stage('linux-amd64') {
+          agent {label 'linux-amd64'}
           stages {
             stage('build') {
               steps {
