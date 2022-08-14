@@ -4,7 +4,7 @@ pipeline {
     stage('build and run') {
       parallel {
         stage('linux-armv6') {
-          agent {label 'linux-armv6'}
+          agent none
           stages {
             stage('build') {
               steps {
@@ -20,7 +20,7 @@ pipeline {
           }
         }
           stage('darwin-amd64') {
-          agent {label 'darwin-amd64'}
+          agent none
           stages {
             stage('build') {
               steps {
@@ -36,7 +36,7 @@ pipeline {
           }
         }      
         stage('linux-amd64') {
-          agent {label 'linux-amd64'}
+          agent none
           stages {
             stage('build') {
               steps {
