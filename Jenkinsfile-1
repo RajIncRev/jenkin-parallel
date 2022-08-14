@@ -1,0 +1,49 @@
+pipeline {
+  agent none
+  stages {
+    stage('build') {
+      parallel {
+        stage('Stage-1') {
+          agent none
+          steps {
+            echo "Build application-1 in windows agent"
+          }
+        }
+        stage('Stage-2') {
+          agent none
+          steps {
+             echo "Build application-1 in Linux agent"
+          }
+        }
+        stage('Stage-3') {
+          agent none
+          steps {
+             echo "Build application-1 in Darwin agent"
+          }
+        }
+      }
+    }
+    stage('run') {
+      parallel {
+         stage('Stage-1') {
+          agent none
+          steps {
+            echo "Run application-1 in windows agent"
+          }
+        }
+        stage('Stage-2') {
+          agent none
+          steps {
+             echo "RUn application-1 in Linux agent"
+          }
+        }
+        stage('Stage-3') {
+          agent none
+          steps {
+             echo "Run application-1 in Darwin agent"
+          }
+        }
+      }
+    }
+  }
+}
