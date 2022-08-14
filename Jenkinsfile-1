@@ -16,7 +16,7 @@ pipeline {
           }
         }
         stage('Stage-3') {
-          agent none
+          agent any
           steps {
              echo "Build application-1 in Darwin agent"
              echo "Build application"
