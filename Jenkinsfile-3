@@ -1,0 +1,57 @@
+pipeline {
+  agent none
+  stages {
+    stage('build and run') {
+      parallel {
+        stage('Stage-1') {
+          agent {label 'windows'}
+          stages {
+            stage('build') {
+              steps {
+                  echo "Build application"
+			 	  bat "mvnw  -Dmaven.test.skip=true clean compile package"
+              }
+            }
+            stage('run') {
+              steps {
+                 echo "Run application-1 in windows agent"
+              }
+            }
+          }
+        }
+        stage('linux-amd64') {
+          agent {label 'windows'}
+          stages {
+            stage('build') {
+              steps {
+                 echo "Build application"
+			 	 bat "mvnw  -Dmaven.test.skip=true clean compile package"
+              }
+            }
+            stage('run') {
+              steps {
+                echo "Run application-1 in windows agent-1"
+              }
+            }
+          }
+        }      
+        stage('darwin-amd64') {
+          agent {label 'windows'}
+          stages {
+            stage('build') {
+              steps {
+                 echo "Build application"
+			 	 bat "mvnw  -Dmaven.test.skip=true clean compile package"
+              }
+            }
+            stage('run') {
+              steps {
+                echo "Run application-1 in windows agent-2"
+              }
+            }
+          }
+        }      
+      }
+    }
+  }
+}
