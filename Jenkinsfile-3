@@ -8,45 +8,14 @@ pipeline {
           stages {
             stage('build') {
               steps {
-                  echo "Build application"
-			 	  bat "mvnw  -Dmaven.test.skip=true clean compile package"
+                echo "Build application-1 in Darwin agent"
+             	echo "Build application"
+			 	bat "mvnw  -Dmaven.test.skip=true clean compile package"
               }
             }
             stage('run') {
               steps {
                  echo "Run application-1 in windows agent"
-              }
-            }
-          }
-        }
-          stage('darwin-amd64') {
-          agent none
-          stages {
-            stage('build') {
-              steps {
-                 echo "Build application"
-			 	 bat "mvnw  -Dmaven.test.skip=true clean compile package"
-              }
-            }
-            stage('run') {
-              steps {
-                echo "Run application-1 in windows agent-1"
-              }
-            }
-          }
-        }      
-        stage('linux-amd64') {
-          agent none
-          stages {
-            stage('build') {
-              steps {
-                 echo "Build application"
-			 	 bat "mvnw  -Dmaven.test.skip=true clean compile package"
-              }
-            }
-            stage('run') {
-              steps {
-                echo "Run application-1 in windows agent-2"
               }
             }
           }
